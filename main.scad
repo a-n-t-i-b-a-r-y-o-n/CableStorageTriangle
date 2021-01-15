@@ -20,7 +20,7 @@ BaseThickness       = 1;
 
 
 // Inner cylinder
-translate([TriangleSide/2-CylinderDiameter/2,(TriangleSide/2)-(CylinderDiameter),0]){
+translate([TriangleSide/2-CylinderDiameter/2,(TriangleSide/2)-(CylinderDiameter)+CylinderThickness,0]){
     inner_cylinder();
 }
 
