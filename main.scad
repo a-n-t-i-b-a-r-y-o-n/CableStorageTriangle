@@ -5,7 +5,7 @@ include <modules/triangle.scad>
 
 $fn = 90;
 
-CylinderHeight      = 100;
+CylinderHeight      = 90;
 CylinderDiameter    = 80;
 CylinderThickness   = 4;
 
@@ -14,13 +14,29 @@ TriangleWidth       = 160;
 TriangleSide        = (TriangleWidth/sin(60))*sin(90);
 TriangleThickness   = 4;
 
+NotchWidth          = 12;
+
+BaseThickness       = 1;
+
 translate([TriangleSide/2-CylinderDiameter/2,(TriangleSide/2)-(CylinderDiameter),0]){
     inner_cylinder();
 }
 
 difference(){
-    translate([TriangleSide/2,0,0])
-        triangle_center(TriangleWidth, TriangleHeight);
+    
+    translate([TriangleSide/2,0,0]){
+        difference(){
+            triangle_center(TriangleWidth, TriangleHeight);
+            translate([0,TriangleThickness-1,BaseThickness])
+                triangle_center((TriangleWidth)-(TriangleThickness*2),TriangleHeight+2);
+        }
+    }
+    
+    // Notches
+    translate([8,-1,BaseThickness])
+        cube([12,TriangleThickness+2,TriangleHeight]);
+    
+}
     /*
     translate([TriangleThickness,TriangleThickness,-1])
         triangle(TriangleWidth-(TriangleThickness*2),TriangleHeight+2);
@@ -39,4 +55,3 @@ difference(){
         }
     }
     */
-}
