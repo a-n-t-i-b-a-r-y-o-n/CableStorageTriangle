@@ -24,14 +24,14 @@ translate([TriangleSide/2-CylinderDiameter/2,(TriangleSide/2)-(CylinderDiameter)
     inner_cylinder();
 }
 
-// Sides
+// x-plane side
 wall_with_notch();
-
+// right side
 translate([TriangleSide,TriangleThickness,0]){
     rotate([0,0,120])
         wall_with_notch();
 }
-
+// left side
 translate([TriangleSide/2,TriangleWidth,0]){
     rotate([0,0,60]){
         mirror([1,0,0])
@@ -42,15 +42,23 @@ translate([TriangleSide/2,TriangleWidth,0]){
 
 
 // Base
-translate([TriangleSide/2,0,0]){
-    triangle_center(TriangleWidth, BaseThickness);
+difference(){
+    // triangle base
+    translate([TriangleSide/2,0,0]){
+        triangle_center(TriangleWidth, BaseThickness);
+    }
+    // hollow circle to match inner hollow portion of cylinder
+    translate([TriangleSide/2,(TriangleSide/2)-(CylinderDiameter/2)+CylinderThickness,-1]){
+        cylinder(h=CylinderHeight+CylinderThickness,r1=(CylinderDiameter/2)-(CylinderThickness*2),r2=(CylinderDiameter/2)-(CylinderThickness*2));
+    }
 }
 
 
 module wall_with_notch(){
     difference(){
+        // wall
         cube([TriangleSide,TriangleThickness,TriangleHeight]);
-        // Notches
+        // notch
         translate([8,-1,BaseThickness])
             cube([12,TriangleThickness+2,TriangleHeight]);
     }
