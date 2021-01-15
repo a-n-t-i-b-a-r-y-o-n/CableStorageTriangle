@@ -3,14 +3,14 @@ include <modules/triangle.scad>
 
 // Cable storage
 
-$fn = 90;
+$fn = 360;
 
-CylinderHeight      = 90;
+CylinderHeight      = 60;
 CylinderDiameter    = 80;
-CylinderThickness   = 4;
+CylinderThickness   = 3;
 
-TriangleHeight      = 90;
-TriangleWidth       = 160;
+TriangleHeight      = 60;
+TriangleWidth       = 150;
 TriangleSide        = (TriangleWidth/sin(60))*sin(90);
 TriangleThickness   = 4;
 
