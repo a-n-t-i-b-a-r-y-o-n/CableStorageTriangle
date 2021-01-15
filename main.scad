@@ -18,40 +18,40 @@ NotchWidth          = 12;
 
 BaseThickness       = 1;
 
+
+// Inner cylinder
 translate([TriangleSide/2-CylinderDiameter/2,(TriangleSide/2)-(CylinderDiameter),0]){
     inner_cylinder();
 }
 
-difference(){
-    
-    translate([TriangleSide/2,0,0]){
-        difference(){
-            triangle_center(TriangleWidth, TriangleHeight);
-            translate([0,TriangleThickness-1,BaseThickness])
-                triangle_center((TriangleWidth)-(TriangleThickness*2),TriangleHeight+2);
-        }
-    }
-    
-    // Notches
-    translate([8,-1,BaseThickness])
-        cube([12,TriangleThickness+2,TriangleHeight]);
-    
+// Sides
+wall_with_notch();
+
+translate([TriangleSide,TriangleThickness,0]){
+    rotate([0,0,120])
+        wall_with_notch();
 }
-    /*
-    translate([TriangleThickness,TriangleThickness,-1])
-        triangle(TriangleWidth-(TriangleThickness*2),TriangleHeight+2);
-    /*
-    linear_extrude(height=TriangleHeight){
-        polygon(points=[[0,0], [TriangleSide,0], [TriangleSide/2,TriangleWidth]]);
+
+translate([TriangleSide/2,TriangleWidth,0]){
+    rotate([0,0,60]){
+        mirror([1,0,0])
+            wall_with_notch();
     }
-    */
-    /*
-    translate([0,0,-1]){
-        linear_extrude(height=TriangleHeight+2){
-            polygon(points=[
-            [TriangleThickness,TriangleThickness],
-            [TriangleSide-TriangleThickness,TriangleThickness],
-            [(TriangleSide/2)-TriangleThickness,TriangleWidth-TriangleThickness]]);
-        }
+}
+
+
+
+// Base
+translate([TriangleSide/2,0,0]){
+    triangle_center(TriangleWidth, BaseThickness);
+}
+
+
+module wall_with_notch(){
+    difference(){
+        cube([TriangleSide,TriangleThickness,TriangleHeight]);
+        // Notches
+        translate([8,-1,BaseThickness])
+            cube([12,TriangleThickness+2,TriangleHeight]);
     }
-    */
+}
