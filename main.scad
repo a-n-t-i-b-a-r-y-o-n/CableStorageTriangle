@@ -7,7 +7,7 @@ CylinderDiameter    = 70;
 CylinderThickness   = 3;
 
 TriangleHeight      = 65;
-TriangleWidth       = 185;
+TriangleWidth       = 200;
 TriangleSide        = (TriangleWidth/sin(60))*sin(90);
 TriangleThickness   = 5;
 
